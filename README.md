@@ -1,12 +1,50 @@
-# Real-Time Cross-Border KYC Verification: Scalability & Business Impact
+# Real-Time Cross-Border KYC Verification: Scalability & Business Impact 🌐
 
 ## Solution Overview
 Our decentralized KYC verification network transforms cross-border payments by enabling banks to instantly share and verify customer identity information through secure digital credentials. This eliminates manual back-office processes that currently delay international transfers by days, replacing them with real-time cryptographic verification that takes seconds.
 
-## Demo & Resources
+## Demo & Resources 🚀
 - **Backend Services Repository**: [kyc-hub-services](https://github.com/manucr619/kyc-hub-services)
 - **Frontend Portal Repository**: [kyc-hub-portal](https://github.com/manucr619/kyc-hub-portal)
 - **Live UI Design Mock**: [View Demo](https://preview--kyc-hub-portal.lovable.app/)
+- **API Documentation**: 
+  - OpenAPI Specification: [api-docs.json](src/main/resources/swagger/api-docs.json)
+  - Swagger UI: http://localhost:9000/swagger-ui/index.html (when running locally)
+  - API Base URL: http://localhost:9000/api/v1
+
+## Development Tools & Technologies 🛠️
+
+### Project Development Tools 🔧
+- **Market Research**: 
+  - ChatGPT 4.0 for initial research 🤖
+  - Deep research using industry reports 📊
+  - Perplexity AI for market analysis 🔍
+- **Code Generation**: 
+  - JHipster for boilerplate generation ⚡
+  - ChatGPT for JDL and database relations 📝
+- **UI/UX Design**:
+  - Claude AI for UI screen prompts 🎨
+  - Lovable.ai for UI generation and refinement 🎯
+- **Documentation**:
+  - PlantUML via [PlantText](https://www.planttext.com/) for system diagrams 📊
+  - Markdown for documentation 📑
+
+### Technical Stack 💻
+- **Backend**: 
+  - Spring Boot 3.2 🍃
+  - Java 17 ☕
+  - PostgreSQL 16 🐘
+- **Frontend**: 
+  - Angular 17 🅰️
+  - TailwindCSS 3 🎨
+  - TypeScript 5 📘
+- **DevOps & Tools**:
+  - Docker & Kubernetes 🐳
+  - GitHub Actions for CI/CD 🔄
+  - Prometheus & Grafana for monitoring 📈
+- **Security**:
+  - JWT & OAuth2 🔐
+  - Spring Security 🛡️
 
 ## System Flow
 ![KYC Verification Flow](ekyc-Flow.png)
@@ -63,16 +101,6 @@ The sequence diagram above illustrates the complete flow of a cross-border trans
 
 ## Competitive Advantage
 Our solution stands apart by prioritizing **compliance-by-design**, creating a system where KYC verification becomes a digital asset rather than a processing burden. Unlike siloed approaches, our network provides true interoperability while maintaining the highest security and privacy standards through modern cryptography and distributed architecture.
-
-## Technical Stack
-- **Backend**: Spring Boot with Java 17
-- **Frontend**: Angular 17
-- **Database**: PostgreSQL
-- **API Documentation**: Swagger/OpenAPI
-- **Security**: JWT, OAuth2
-- **Monitoring**: Prometheus & Grafana
-- **CI/CD**: GitHub Actions
-- **Containerization**: Docker & Kubernetes
 
 ## Getting Started
 1. Clone the repository
