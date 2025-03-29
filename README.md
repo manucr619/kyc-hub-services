@@ -3,6 +3,11 @@
 ## Solution Overview
 Our decentralized KYC verification network transforms cross-border payments by enabling banks to instantly share and verify customer identity information through secure digital credentials. This eliminates manual back-office processes that currently delay international transfers by days, replacing them with real-time cryptographic verification that takes seconds.
 
+## Demo & Resources
+- **Backend Services Repository**: [kyc-hub-services](https://github.com/manucr619/kyc-hub-services)
+- **Frontend Portal Repository**: [kyc-hub-portal](https://github.com/manucr619/kyc-hub-portal)
+- **Live UI Design Mock**: [View Demo](https://preview--kyc-hub-portal.lovable.app/)
+
 ## System Flow
 ![KYC Verification Flow](ekyc-Flow.png)
 
