@@ -7,8 +7,7 @@ Our decentralized KYC verification network transforms cross-border payments by e
 - **Backend Services Repository**: [kyc-hub-services](https://github.com/manucr619/kyc-hub-services)
 - **Frontend Portal Repository**: [kyc-hub-portal](https://github.com/manucr619/kyc-hub-portal)
 - **Live UI Design Mock**: [View Demo](https://preview--kyc-hub-portal.lovable.app/)
-- **API Documentation**: 
-  - OpenAPI Specification: [api-docs.json](src/main/resources/swagger/api-docs.json)
+- **API Documentation**:
   - Swagger UI: http://localhost:9000/swagger-ui/index.html (when running locally)
   - API Base URL: http://localhost:9000/api/v1
 
