@@ -1,0 +1,66 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (aPIAuditLog(); as aPIAuditLogRef) {
+      <div>
+        <h2 data-cy="aPIAuditLogDetailsHeading"><span jhiTranslate="kycNetworkApp.aPIAuditLog.detail.title">API Audit Log</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ aPIAuditLogRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.aPIAuditLog.eventTime">Event Time</span></dt>
+          <dd>
+            <span>{{ aPIAuditLogRef.eventTime | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.aPIAuditLog.action">Action</span></dt>
+          <dd>
+            <span>{{ aPIAuditLogRef.action }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.aPIAuditLog.statusCode">Status Code</span></dt>
+          <dd>
+            <span>{{ aPIAuditLogRef.statusCode }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.aPIAuditLog.message">Message</span></dt>
+          <dd>
+            <span>{{ aPIAuditLogRef.message }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.aPIAuditLog.sourceIP">Source IP</span></dt>
+          <dd>
+            <span>{{ aPIAuditLogRef.sourceIP }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.aPIAuditLog.initiatedBy">Initiated By</span></dt>
+          <dd>
+            <span>{{ aPIAuditLogRef.initiatedBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.aPIAuditLog.endpointAccessed">Endpoint Accessed</span></dt>
+          <dd>
+            <span>{{ aPIAuditLogRef.endpointAccessed }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.aPIAuditLog.bank">Bank</span></dt>
+          <dd>
+            @if (aPIAuditLog()!.bank) {
+              <div>
+                <a [routerLink]="['/bank', aPIAuditLog()!.bank?.id, 'view']">{{ aPIAuditLogRef.bank?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/api-audit-log', aPIAuditLogRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

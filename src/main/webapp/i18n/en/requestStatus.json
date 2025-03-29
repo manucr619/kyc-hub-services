@@ -1,0 +1,11 @@
+{
+  "kycNetworkApp": {
+    "RequestStatus": {
+      "null": "",
+      "REQUESTED": "REQUESTED",
+      "APPROVED": "APPROVED",
+      "DENIED": "DENIED",
+      "EXPIRED": "EXPIRED"
+    }
+  }
+}

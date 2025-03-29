@@ -1,0 +1,122 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-country-regulation-heading"
+        data-cy="CountryRegulationCreateUpdateHeading"
+        jhiTranslate="kycNetworkApp.countryRegulation.home.createOrEditLabel"
+      >
+        Create or edit a Country Regulation
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="kycNetworkApp.countryRegulation.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let countryCodeRef = editForm.get('countryCode')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_countryCode" jhiTranslate="kycNetworkApp.countryRegulation.countryCode">Country Code</label>
+          <input
+            type="text"
+            class="form-control"
+            name="countryCode"
+            id="field_countryCode"
+            data-cy="countryCode"
+            formControlName="countryCode"
+          />
+          @if (countryCodeRef.invalid && (countryCodeRef.dirty || countryCodeRef.touched)) {
+            <div>
+              @if (editForm.get('countryCode')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let countryNameRef = editForm.get('countryName')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_countryName" jhiTranslate="kycNetworkApp.countryRegulation.countryName">Country Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="countryName"
+            id="field_countryName"
+            data-cy="countryName"
+            formControlName="countryName"
+          />
+          @if (countryNameRef.invalid && (countryNameRef.dirty || countryNameRef.touched)) {
+            <div>
+              @if (editForm.get('countryName')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_kycRequirements" jhiTranslate="kycNetworkApp.countryRegulation.kycRequirements"
+            >Kyc Requirements</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="kycRequirements"
+            id="field_kycRequirements"
+            data-cy="kycRequirements"
+            formControlName="kycRequirements"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dataLocalization" jhiTranslate="kycNetworkApp.countryRegulation.dataLocalization"
+            >Data Localization</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="dataLocalization"
+            id="field_dataLocalization"
+            data-cy="dataLocalization"
+            formControlName="dataLocalization"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_regulatorContact" jhiTranslate="kycNetworkApp.countryRegulation.regulatorContact"
+            >Regulator Contact</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="regulatorContact"
+            id="field_regulatorContact"
+            data-cy="regulatorContact"
+            formControlName="regulatorContact"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

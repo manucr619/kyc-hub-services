@@ -1,0 +1,11 @@
+{
+  "kycNetworkApp": {
+    "TransactionStatus": {
+      "null": "",
+      "PENDING": "PENDING",
+      "VERIFIED": "VERIFIED",
+      "FLAGGED": "FLAGGED",
+      "COMPLETED": "COMPLETED"
+    }
+  }
+}

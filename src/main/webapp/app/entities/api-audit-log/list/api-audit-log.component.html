@@ -1,0 +1,164 @@
+<div>
+  <h2 id="page-heading" data-cy="APIAuditLogHeading">
+    <span jhiTranslate="kycNetworkApp.aPIAuditLog.home.title">API Audit Logs</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="kycNetworkApp.aPIAuditLog.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-api-audit-log"
+        [routerLink]="['/api-audit-log/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="kycNetworkApp.aPIAuditLog.home.createLabel">Create a new API Audit Log</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (aPIAuditLogs().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="kycNetworkApp.aPIAuditLog.home.notFound">No API Audit Logs found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="eventTime">
+              <div class="d-flex">
+                <span jhiTranslate="kycNetworkApp.aPIAuditLog.eventTime">Event Time</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="action">
+              <div class="d-flex">
+                <span jhiTranslate="kycNetworkApp.aPIAuditLog.action">Action</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="statusCode">
+              <div class="d-flex">
+                <span jhiTranslate="kycNetworkApp.aPIAuditLog.statusCode">Status Code</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="message">
+              <div class="d-flex">
+                <span jhiTranslate="kycNetworkApp.aPIAuditLog.message">Message</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="sourceIP">
+              <div class="d-flex">
+                <span jhiTranslate="kycNetworkApp.aPIAuditLog.sourceIP">Source IP</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="initiatedBy">
+              <div class="d-flex">
+                <span jhiTranslate="kycNetworkApp.aPIAuditLog.initiatedBy">Initiated By</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="endpointAccessed">
+              <div class="d-flex">
+                <span jhiTranslate="kycNetworkApp.aPIAuditLog.endpointAccessed">Endpoint Accessed</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="bank.id">
+              <div class="d-flex">
+                <span jhiTranslate="kycNetworkApp.aPIAuditLog.bank">Bank</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (aPIAuditLog of aPIAuditLogs(); track trackId(aPIAuditLog)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/api-audit-log', aPIAuditLog.id, 'view']">{{ aPIAuditLog.id }}</a>
+              </td>
+              <td>{{ aPIAuditLog.eventTime | formatMediumDatetime }}</td>
+              <td>{{ aPIAuditLog.action }}</td>
+              <td>{{ aPIAuditLog.statusCode }}</td>
+              <td>{{ aPIAuditLog.message }}</td>
+              <td>{{ aPIAuditLog.sourceIP }}</td>
+              <td>{{ aPIAuditLog.initiatedBy }}</td>
+              <td>{{ aPIAuditLog.endpointAccessed }}</td>
+              <td>
+                @if (aPIAuditLog.bank) {
+                  <div>
+                    <a [routerLink]="['/bank', aPIAuditLog.bank.id, 'view']">{{ aPIAuditLog.bank.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/api-audit-log', aPIAuditLog.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/api-audit-log', aPIAuditLog.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(aPIAuditLog)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (aPIAuditLogs().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

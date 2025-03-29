@@ -1,0 +1,31 @@
+{
+  "kycNetworkApp": {
+    "aPIAuditLog": {
+      "home": {
+        "title": "API Audit Logs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new API Audit Log",
+        "createOrEditLabel": "Create or edit a API Audit Log",
+        "notFound": "No API Audit Logs found"
+      },
+      "created": "A new API Audit Log is created with identifier {{ param }}",
+      "updated": "A API Audit Log is updated with identifier {{ param }}",
+      "deleted": "A API Audit Log is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete API Audit Log {{ id }}?"
+      },
+      "detail": {
+        "title": "API Audit Log"
+      },
+      "id": "ID",
+      "eventTime": "Event Time",
+      "action": "Action",
+      "statusCode": "Status Code",
+      "message": "Message",
+      "sourceIP": "Source IP",
+      "initiatedBy": "Initiated By",
+      "endpointAccessed": "Endpoint Accessed",
+      "bank": "Bank"
+    }
+  }
+}

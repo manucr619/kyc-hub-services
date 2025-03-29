@@ -1,0 +1,134 @@
+application {
+  config {
+    baseName KYCNetwork,
+    applicationType monolith,
+    packageName com.kycnetwork,
+    authenticationType jwt,
+    prodDatabaseType postgresql,
+    buildTool maven,
+    clientFramework angular
+  }
+  entities *
+}
+
+entity Bank {
+  name String required,
+  bicCode String required,
+  country String required,
+  isActive Boolean
+}
+
+entity Customer {
+  fullName String required,
+  dateOfBirth LocalDate,
+  customerType CustomerType required,
+  nationalId String,
+  passportNumber String,
+  address String,
+  email String,
+  phone String,
+  country String
+}
+
+enum CustomerType {
+  INDIVIDUAL,
+  BUSINESS
+}
+
+entity KycCredential {
+  issuedDate Instant required,
+  expiryDate Instant required,
+  status CredentialStatus required,
+  levelOfVerification String,
+  schemaVersion String,
+  credentialHash String required,
+  signature String required
+}
+
+enum CredentialStatus {
+  VALID,
+  EXPIRED,
+  REVOKED
+}
+
+entity Transaction {
+  transactionRef String required,
+  amount BigDecimal required,
+  currency String required,
+  timestamp Instant required,
+  status TransactionStatus required,
+  notes String
+}
+
+enum TransactionStatus {
+  PENDING,
+  VERIFIED,
+  FLAGGED,
+  COMPLETED
+}
+
+entity CountryRegulation {
+  countryCode String required,
+  countryName String required,
+  kycRequirements String,
+  dataLocalization Boolean,
+  regulatorContact String
+}
+
+entity KycConsent {
+  consentToken String required,
+  consentGivenAt Instant required,
+  expiresAt Instant,
+  isRevoked Boolean,
+  revokedAt Instant
+}
+
+entity KycDataRequest {
+  requestRef String required,
+  requestDate Instant required,
+  status RequestStatus required,
+  requestPurpose String,
+  encryptedResponseData String,
+  respondedAt Instant
+}
+
+enum RequestStatus {
+  REQUESTED,
+  APPROVED,
+  DENIED,
+  EXPIRED
+}
+
+entity APIAuditLog {
+  eventTime Instant required,
+  action String required,
+  statusCode Integer,
+  message String,
+  sourceIP String,
+  initiatedBy String,
+  endpointAccessed String
+}
+
+/* Relationships */
+relationship ManyToOne {
+  KycCredential{issuer} to Bank,
+  KycCredential{customer} to Customer,
+  Transaction{originator} to Customer,
+  Transaction{beneficiary} to Customer,
+  Transaction{originatorBank} to Bank,
+  Transaction{beneficiaryBank} to Bank,
+  Customer{countryRegulation} to CountryRegulation,
+  KycConsent{customer} to Customer,
+  KycConsent{issuerBank} to Bank,
+  KycConsent{recipientBank} to Bank,
+  KycDataRequest{customer} to Customer,
+  KycDataRequest{fromBank} to Bank,
+  KycDataRequest{toBank} to Bank,
+  KycDataRequest{consent} to KycConsent,
+  APIAuditLog{bank} to Bank
+}
+
+/* DTO & Service Generation */
+dto * with mapstruct
+service * with serviceClass
+paginate * with pagination

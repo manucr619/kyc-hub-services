@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (bank(); as bankRef) {
+      <div>
+        <h2 data-cy="bankDetailsHeading"><span jhiTranslate="kycNetworkApp.bank.detail.title">Bank</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ bankRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.bank.name">Name</span></dt>
+          <dd>
+            <span>{{ bankRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.bank.bicCode">Bic Code</span></dt>
+          <dd>
+            <span>{{ bankRef.bicCode }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.bank.country">Country</span></dt>
+          <dd>
+            <span>{{ bankRef.country }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.bank.isActive">Is Active</span></dt>
+          <dd>
+            <span>{{ bankRef.isActive }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/bank', bankRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

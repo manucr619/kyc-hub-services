@@ -1,0 +1,90 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (transaction(); as transactionRef) {
+      <div>
+        <h2 data-cy="transactionDetailsHeading"><span jhiTranslate="kycNetworkApp.transaction.detail.title">Transaction</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ transactionRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.transaction.transactionRef">Transaction Ref</span></dt>
+          <dd>
+            <span>{{ transactionRef.transactionRef }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.transaction.amount">Amount</span></dt>
+          <dd>
+            <span>{{ transactionRef.amount }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.transaction.currency">Currency</span></dt>
+          <dd>
+            <span>{{ transactionRef.currency }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.transaction.timestamp">Timestamp</span></dt>
+          <dd>
+            <span>{{ transactionRef.timestamp | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.transaction.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'kycNetworkApp.TransactionStatus.' + (transactionRef.status ?? 'null')">{{
+              { null: '', PENDING: 'PENDING', VERIFIED: 'VERIFIED', FLAGGED: 'FLAGGED', COMPLETED: 'COMPLETED' }[
+                transactionRef.status ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.transaction.notes">Notes</span></dt>
+          <dd>
+            <span>{{ transactionRef.notes }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.transaction.originator">Originator</span></dt>
+          <dd>
+            @if (transaction()!.originator) {
+              <div>
+                <a [routerLink]="['/customer', transaction()!.originator?.id, 'view']">{{ transactionRef.originator?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.transaction.beneficiary">Beneficiary</span></dt>
+          <dd>
+            @if (transaction()!.beneficiary) {
+              <div>
+                <a [routerLink]="['/customer', transaction()!.beneficiary?.id, 'view']">{{ transactionRef.beneficiary?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.transaction.originatorBank">Originator Bank</span></dt>
+          <dd>
+            @if (transaction()!.originatorBank) {
+              <div>
+                <a [routerLink]="['/bank', transaction()!.originatorBank?.id, 'view']">{{ transactionRef.originatorBank?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.transaction.beneficiaryBank">Beneficiary Bank</span></dt>
+          <dd>
+            @if (transaction()!.beneficiaryBank) {
+              <div>
+                <a [routerLink]="['/bank', transaction()!.beneficiaryBank?.id, 'view']">{{ transactionRef.beneficiaryBank?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/transaction', transactionRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

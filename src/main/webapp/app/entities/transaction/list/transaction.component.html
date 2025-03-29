@@ -1,0 +1,201 @@
+<div>
+  <h2 id="page-heading" data-cy="TransactionHeading">
+    <span jhiTranslate="kycNetworkApp.transaction.home.title">Transactions</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="kycNetworkApp.transaction.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-transaction"
+        [routerLink]="['/transaction/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="kycNetworkApp.transaction.home.createLabel">Create a new Transaction</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (transactions().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="kycNetworkApp.transaction.home.notFound">No Transactions found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="transactionRef">
+              <div class="d-flex">
+                <span jhiTranslate="kycNetworkApp.transaction.transactionRef">Transaction Ref</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="amount">
+              <div class="d-flex">
+                <span jhiTranslate="kycNetworkApp.transaction.amount">Amount</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="currency">
+              <div class="d-flex">
+                <span jhiTranslate="kycNetworkApp.transaction.currency">Currency</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="timestamp">
+              <div class="d-flex">
+                <span jhiTranslate="kycNetworkApp.transaction.timestamp">Timestamp</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="kycNetworkApp.transaction.status">Status</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="notes">
+              <div class="d-flex">
+                <span jhiTranslate="kycNetworkApp.transaction.notes">Notes</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="originator.id">
+              <div class="d-flex">
+                <span jhiTranslate="kycNetworkApp.transaction.originator">Originator</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="beneficiary.id">
+              <div class="d-flex">
+                <span jhiTranslate="kycNetworkApp.transaction.beneficiary">Beneficiary</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="originatorBank.id">
+              <div class="d-flex">
+                <span jhiTranslate="kycNetworkApp.transaction.originatorBank">Originator Bank</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="beneficiaryBank.id">
+              <div class="d-flex">
+                <span jhiTranslate="kycNetworkApp.transaction.beneficiaryBank">Beneficiary Bank</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (transaction of transactions(); track trackId(transaction)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/transaction', transaction.id, 'view']">{{ transaction.id }}</a>
+              </td>
+              <td>{{ transaction.transactionRef }}</td>
+              <td>{{ transaction.amount }}</td>
+              <td>{{ transaction.currency }}</td>
+              <td>{{ transaction.timestamp | formatMediumDatetime }}</td>
+              <td [jhiTranslate]="'kycNetworkApp.TransactionStatus.' + (transaction.status ?? 'null')">
+                {{
+                  { null: '', PENDING: 'PENDING', VERIFIED: 'VERIFIED', FLAGGED: 'FLAGGED', COMPLETED: 'COMPLETED' }[
+                    transaction.status ?? 'null'
+                  ]
+                }}
+              </td>
+              <td>{{ transaction.notes }}</td>
+              <td>
+                @if (transaction.originator) {
+                  <div>
+                    <a [routerLink]="['/customer', transaction.originator.id, 'view']">{{ transaction.originator.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (transaction.beneficiary) {
+                  <div>
+                    <a [routerLink]="['/customer', transaction.beneficiary.id, 'view']">{{ transaction.beneficiary.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (transaction.originatorBank) {
+                  <div>
+                    <a [routerLink]="['/bank', transaction.originatorBank.id, 'view']">{{ transaction.originatorBank.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (transaction.beneficiaryBank) {
+                  <div>
+                    <a [routerLink]="['/bank', transaction.beneficiaryBank.id, 'view']">{{ transaction.beneficiaryBank.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/transaction', transaction.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/transaction', transaction.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(transaction)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (transactions().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

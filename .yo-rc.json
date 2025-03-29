@@ -1,0 +1,19 @@
+{
+  "generator-jhipster": {
+    "applicationType": "monolith",
+    "authenticationType": "jwt",
+    "baseName": "KYCNetwork",
+    "buildTool": "maven",
+    "clientFramework": "angular",
+    "entities": ["Bank", "Customer", "KycCredential", "Transaction", "CountryRegulation", "KycConsent", "KycDataRequest", "APIAuditLog"],
+    "jhipsterVersion": "8.9.0",
+    "jwtSecretKey": "NGY3NDNhMzUwNWM0YjhkOTE4ZWNmYTEwOWYwMTI0Y2YwN2U3ZTM4ODBmOWQyNDI4ZDlmYTU5NDA5MjAyY2IxMzNmNmZjMzRkOWQxN2UxODQ3NmY0Y2VjNTkzMzk5OTNlNzdiY2RkNTYzYzEwZGJkMjllNjcxNDViZGI0YTkwMTc=",
+    "languages": ["en"],
+    "lastLiquibaseTimestamp": 1743287357000,
+    "monorepository": true,
+    "nativeLanguage": "en",
+    "packageName": "com.kycnetwork",
+    "prodDatabaseType": "postgresql",
+    "skipCommitHook": true
+  }
+}

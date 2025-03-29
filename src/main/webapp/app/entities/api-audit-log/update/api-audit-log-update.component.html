@@ -1,0 +1,140 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-api-audit-log-heading"
+        data-cy="APIAuditLogCreateUpdateHeading"
+        jhiTranslate="kycNetworkApp.aPIAuditLog.home.createOrEditLabel"
+      >
+        Create or edit a API Audit Log
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="kycNetworkApp.aPIAuditLog.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let eventTimeRef = editForm.get('eventTime')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_eventTime" jhiTranslate="kycNetworkApp.aPIAuditLog.eventTime">Event Time</label>
+          <div class="d-flex">
+            <input
+              id="field_eventTime"
+              data-cy="eventTime"
+              type="datetime-local"
+              class="form-control"
+              name="eventTime"
+              formControlName="eventTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (eventTimeRef.invalid && (eventTimeRef.dirty || eventTimeRef.touched)) {
+            <div>
+              @if (editForm.get('eventTime')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('eventTime')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let actionRef = editForm.get('action')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_action" jhiTranslate="kycNetworkApp.aPIAuditLog.action">Action</label>
+          <input type="text" class="form-control" name="action" id="field_action" data-cy="action" formControlName="action" />
+          @if (actionRef.invalid && (actionRef.dirty || actionRef.touched)) {
+            <div>
+              @if (editForm.get('action')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_statusCode" jhiTranslate="kycNetworkApp.aPIAuditLog.statusCode">Status Code</label>
+          <input
+            type="number"
+            class="form-control"
+            name="statusCode"
+            id="field_statusCode"
+            data-cy="statusCode"
+            formControlName="statusCode"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_message" jhiTranslate="kycNetworkApp.aPIAuditLog.message">Message</label>
+          <input type="text" class="form-control" name="message" id="field_message" data-cy="message" formControlName="message" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_sourceIP" jhiTranslate="kycNetworkApp.aPIAuditLog.sourceIP">Source IP</label>
+          <input type="text" class="form-control" name="sourceIP" id="field_sourceIP" data-cy="sourceIP" formControlName="sourceIP" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_initiatedBy" jhiTranslate="kycNetworkApp.aPIAuditLog.initiatedBy">Initiated By</label>
+          <input
+            type="text"
+            class="form-control"
+            name="initiatedBy"
+            id="field_initiatedBy"
+            data-cy="initiatedBy"
+            formControlName="initiatedBy"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_endpointAccessed" jhiTranslate="kycNetworkApp.aPIAuditLog.endpointAccessed"
+            >Endpoint Accessed</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="endpointAccessed"
+            id="field_endpointAccessed"
+            data-cy="endpointAccessed"
+            formControlName="endpointAccessed"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_bank" jhiTranslate="kycNetworkApp.aPIAuditLog.bank">Bank</label>
+          <select class="form-control" id="field_bank" data-cy="bank" name="bank" formControlName="bank" [compareWith]="compareBank">
+            <option [ngValue]="null"></option>
+            @for (bankOption of banksSharedCollection; track $index) {
+              <option [ngValue]="bankOption">{{ bankOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

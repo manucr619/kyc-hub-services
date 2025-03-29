@@ -1,0 +1,78 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (customer(); as customerRef) {
+      <div>
+        <h2 data-cy="customerDetailsHeading"><span jhiTranslate="kycNetworkApp.customer.detail.title">Customer</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ customerRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.customer.fullName">Full Name</span></dt>
+          <dd>
+            <span>{{ customerRef.fullName }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.customer.dateOfBirth">Date Of Birth</span></dt>
+          <dd>
+            <span>{{ customerRef.dateOfBirth | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.customer.customerType">Customer Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'kycNetworkApp.CustomerType.' + (customerRef.customerType ?? 'null')">{{
+              { null: '', INDIVIDUAL: 'INDIVIDUAL', BUSINESS: 'BUSINESS' }[customerRef.customerType ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.customer.nationalId">National Id</span></dt>
+          <dd>
+            <span>{{ customerRef.nationalId }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.customer.passportNumber">Passport Number</span></dt>
+          <dd>
+            <span>{{ customerRef.passportNumber }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.customer.address">Address</span></dt>
+          <dd>
+            <span>{{ customerRef.address }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.customer.email">Email</span></dt>
+          <dd>
+            <span>{{ customerRef.email }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.customer.phone">Phone</span></dt>
+          <dd>
+            <span>{{ customerRef.phone }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.customer.country">Country</span></dt>
+          <dd>
+            <span>{{ customerRef.country }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.customer.countryRegulation">Country Regulation</span></dt>
+          <dd>
+            @if (customer()!.countryRegulation) {
+              <div>
+                <a [routerLink]="['/country-regulation', customer()!.countryRegulation?.id, 'view']">{{
+                  customerRef.countryRegulation?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/customer', customerRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (countryRegulation(); as countryRegulationRef) {
+      <div>
+        <h2 data-cy="countryRegulationDetailsHeading">
+          <span jhiTranslate="kycNetworkApp.countryRegulation.detail.title">Country Regulation</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ countryRegulationRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.countryRegulation.countryCode">Country Code</span></dt>
+          <dd>
+            <span>{{ countryRegulationRef.countryCode }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.countryRegulation.countryName">Country Name</span></dt>
+          <dd>
+            <span>{{ countryRegulationRef.countryName }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.countryRegulation.kycRequirements">Kyc Requirements</span></dt>
+          <dd>
+            <span>{{ countryRegulationRef.kycRequirements }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.countryRegulation.dataLocalization">Data Localization</span></dt>
+          <dd>
+            <span>{{ countryRegulationRef.dataLocalization }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.countryRegulation.regulatorContact">Regulator Contact</span></dt>
+          <dd>
+            <span>{{ countryRegulationRef.regulatorContact }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/country-regulation', countryRegulationRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

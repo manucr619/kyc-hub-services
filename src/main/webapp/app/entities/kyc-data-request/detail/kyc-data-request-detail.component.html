@@ -1,0 +1,92 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (kycDataRequest(); as kycDataRequestRef) {
+      <div>
+        <h2 data-cy="kycDataRequestDetailsHeading">
+          <span jhiTranslate="kycNetworkApp.kycDataRequest.detail.title">Kyc Data Request</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ kycDataRequestRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.kycDataRequest.requestRef">Request Ref</span></dt>
+          <dd>
+            <span>{{ kycDataRequestRef.requestRef }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.kycDataRequest.requestDate">Request Date</span></dt>
+          <dd>
+            <span>{{ kycDataRequestRef.requestDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.kycDataRequest.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'kycNetworkApp.RequestStatus.' + (kycDataRequestRef.status ?? 'null')">{{
+              { null: '', REQUESTED: 'REQUESTED', APPROVED: 'APPROVED', DENIED: 'DENIED', EXPIRED: 'EXPIRED' }[
+                kycDataRequestRef.status ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.kycDataRequest.requestPurpose">Request Purpose</span></dt>
+          <dd>
+            <span>{{ kycDataRequestRef.requestPurpose }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.kycDataRequest.encryptedResponseData">Encrypted Response Data</span></dt>
+          <dd>
+            <span>{{ kycDataRequestRef.encryptedResponseData }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.kycDataRequest.respondedAt">Responded At</span></dt>
+          <dd>
+            <span>{{ kycDataRequestRef.respondedAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.kycDataRequest.customer">Customer</span></dt>
+          <dd>
+            @if (kycDataRequest()!.customer) {
+              <div>
+                <a [routerLink]="['/customer', kycDataRequest()!.customer?.id, 'view']">{{ kycDataRequestRef.customer?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.kycDataRequest.fromBank">From Bank</span></dt>
+          <dd>
+            @if (kycDataRequest()!.fromBank) {
+              <div>
+                <a [routerLink]="['/bank', kycDataRequest()!.fromBank?.id, 'view']">{{ kycDataRequestRef.fromBank?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.kycDataRequest.toBank">To Bank</span></dt>
+          <dd>
+            @if (kycDataRequest()!.toBank) {
+              <div>
+                <a [routerLink]="['/bank', kycDataRequest()!.toBank?.id, 'view']">{{ kycDataRequestRef.toBank?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.kycDataRequest.consent">Consent</span></dt>
+          <dd>
+            @if (kycDataRequest()!.consent) {
+              <div>
+                <a [routerLink]="['/kyc-consent', kycDataRequest()!.consent?.id, 'view']">{{ kycDataRequestRef.consent?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/kyc-data-request', kycDataRequestRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

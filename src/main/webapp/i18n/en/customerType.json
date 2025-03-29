@@ -1,0 +1,9 @@
+{
+  "kycNetworkApp": {
+    "CustomerType": {
+      "null": "",
+      "INDIVIDUAL": "INDIVIDUAL",
+      "BUSINESS": "BUSINESS"
+    }
+  }
+}

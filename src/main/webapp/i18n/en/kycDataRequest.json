@@ -1,0 +1,33 @@
+{
+  "kycNetworkApp": {
+    "kycDataRequest": {
+      "home": {
+        "title": "Kyc Data Requests",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Kyc Data Request",
+        "createOrEditLabel": "Create or edit a Kyc Data Request",
+        "notFound": "No Kyc Data Requests found"
+      },
+      "created": "A new Kyc Data Request is created with identifier {{ param }}",
+      "updated": "A Kyc Data Request is updated with identifier {{ param }}",
+      "deleted": "A Kyc Data Request is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Kyc Data Request {{ id }}?"
+      },
+      "detail": {
+        "title": "Kyc Data Request"
+      },
+      "id": "ID",
+      "requestRef": "Request Ref",
+      "requestDate": "Request Date",
+      "status": "Status",
+      "requestPurpose": "Request Purpose",
+      "encryptedResponseData": "Encrypted Response Data",
+      "respondedAt": "Responded At",
+      "customer": "Customer",
+      "fromBank": "From Bank",
+      "toBank": "To Bank",
+      "consent": "Consent"
+    }
+  }
+}

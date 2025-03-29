@@ -1,0 +1,52 @@
+{
+  "annotations": {
+    "changelogDate": "20250329222917"
+  },
+  "applications": ["KYCNetwork"],
+  "dto": "mapstruct",
+  "entityTableName": "api_audit_log",
+  "fields": [
+    {
+      "fieldName": "eventTime",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "action",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "statusCode",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "message",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "sourceIP",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "initiatedBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "endpointAccessed",
+      "fieldType": "String"
+    }
+  ],
+  "name": "APIAuditLog",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "bank",
+      "relationshipName": "bank",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

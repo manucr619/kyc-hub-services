@@ -1,0 +1,36 @@
+{
+  "annotations": {
+    "changelogDate": "20250329222617"
+  },
+  "applications": ["KYCNetwork"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "countryCode",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "countryName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "kycRequirements",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dataLocalization",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "regulatorContact",
+      "fieldType": "String"
+    }
+  ],
+  "name": "CountryRegulation",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

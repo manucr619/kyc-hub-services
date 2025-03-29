@@ -1,0 +1,55 @@
+{
+  "annotations": {
+    "changelogDate": "20250329222717"
+  },
+  "applications": ["KYCNetwork"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "consentToken",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "consentGivenAt",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "expiresAt",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "isRevoked",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "revokedAt",
+      "fieldType": "Instant"
+    }
+  ],
+  "name": "KycConsent",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "customer",
+      "relationshipName": "customer",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "bank",
+      "relationshipName": "issuerBank",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "bank",
+      "relationshipName": "recipientBank",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

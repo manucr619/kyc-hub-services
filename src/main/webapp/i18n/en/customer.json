@@ -1,0 +1,33 @@
+{
+  "kycNetworkApp": {
+    "customer": {
+      "home": {
+        "title": "Customers",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Customer",
+        "createOrEditLabel": "Create or edit a Customer",
+        "notFound": "No Customers found"
+      },
+      "created": "A new Customer is created with identifier {{ param }}",
+      "updated": "A Customer is updated with identifier {{ param }}",
+      "deleted": "A Customer is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Customer {{ id }}?"
+      },
+      "detail": {
+        "title": "Customer"
+      },
+      "id": "ID",
+      "fullName": "Full Name",
+      "dateOfBirth": "Date Of Birth",
+      "customerType": "Customer Type",
+      "nationalId": "National Id",
+      "passportNumber": "Passport Number",
+      "address": "Address",
+      "email": "Email",
+      "phone": "Phone",
+      "country": "Country",
+      "countryRegulation": "Country Regulation"
+    }
+  }
+}

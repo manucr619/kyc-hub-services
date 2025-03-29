@@ -1,0 +1,177 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-kyc-consent-heading"
+        data-cy="KycConsentCreateUpdateHeading"
+        jhiTranslate="kycNetworkApp.kycConsent.home.createOrEditLabel"
+      >
+        Create or edit a Kyc Consent
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="kycNetworkApp.kycConsent.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let consentTokenRef = editForm.get('consentToken')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_consentToken" jhiTranslate="kycNetworkApp.kycConsent.consentToken">Consent Token</label>
+          <input
+            type="text"
+            class="form-control"
+            name="consentToken"
+            id="field_consentToken"
+            data-cy="consentToken"
+            formControlName="consentToken"
+          />
+          @if (consentTokenRef.invalid && (consentTokenRef.dirty || consentTokenRef.touched)) {
+            <div>
+              @if (editForm.get('consentToken')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let consentGivenAtRef = editForm.get('consentGivenAt')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_consentGivenAt" jhiTranslate="kycNetworkApp.kycConsent.consentGivenAt"
+            >Consent Given At</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_consentGivenAt"
+              data-cy="consentGivenAt"
+              type="datetime-local"
+              class="form-control"
+              name="consentGivenAt"
+              formControlName="consentGivenAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (consentGivenAtRef.invalid && (consentGivenAtRef.dirty || consentGivenAtRef.touched)) {
+            <div>
+              @if (editForm.get('consentGivenAt')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('consentGivenAt')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_expiresAt" jhiTranslate="kycNetworkApp.kycConsent.expiresAt">Expires At</label>
+          <div class="d-flex">
+            <input
+              id="field_expiresAt"
+              data-cy="expiresAt"
+              type="datetime-local"
+              class="form-control"
+              name="expiresAt"
+              formControlName="expiresAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_isRevoked" jhiTranslate="kycNetworkApp.kycConsent.isRevoked">Is Revoked</label>
+          <input type="checkbox" class="form-check" name="isRevoked" id="field_isRevoked" data-cy="isRevoked" formControlName="isRevoked" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_revokedAt" jhiTranslate="kycNetworkApp.kycConsent.revokedAt">Revoked At</label>
+          <div class="d-flex">
+            <input
+              id="field_revokedAt"
+              data-cy="revokedAt"
+              type="datetime-local"
+              class="form-control"
+              name="revokedAt"
+              formControlName="revokedAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_customer" jhiTranslate="kycNetworkApp.kycConsent.customer">Customer</label>
+          <select
+            class="form-control"
+            id="field_customer"
+            data-cy="customer"
+            name="customer"
+            formControlName="customer"
+            [compareWith]="compareCustomer"
+          >
+            <option [ngValue]="null"></option>
+            @for (customerOption of customersSharedCollection; track $index) {
+              <option [ngValue]="customerOption">{{ customerOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_issuerBank" jhiTranslate="kycNetworkApp.kycConsent.issuerBank">Issuer Bank</label>
+          <select
+            class="form-control"
+            id="field_issuerBank"
+            data-cy="issuerBank"
+            name="issuerBank"
+            formControlName="issuerBank"
+            [compareWith]="compareBank"
+          >
+            <option [ngValue]="null"></option>
+            @for (bankOption of banksSharedCollection; track $index) {
+              <option [ngValue]="bankOption">{{ bankOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_recipientBank" jhiTranslate="kycNetworkApp.kycConsent.recipientBank">Recipient Bank</label>
+          <select
+            class="form-control"
+            id="field_recipientBank"
+            data-cy="recipientBank"
+            name="recipientBank"
+            formControlName="recipientBank"
+            [compareWith]="compareBank"
+          >
+            <option [ngValue]="null"></option>
+            @for (bankOption of banksSharedCollection; track $index) {
+              <option [ngValue]="bankOption">{{ bankOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+{
+  "annotations": {
+    "changelogDate": "20250329222817"
+  },
+  "applications": ["KYCNetwork"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "requestRef",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "requestDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "RequestStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "REQUESTED,APPROVED,DENIED,EXPIRED"
+    },
+    {
+      "fieldName": "requestPurpose",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "encryptedResponseData",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "respondedAt",
+      "fieldType": "Instant"
+    }
+  ],
+  "name": "KycDataRequest",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "customer",
+      "relationshipName": "customer",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "bank",
+      "relationshipName": "fromBank",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "bank",
+      "relationshipName": "toBank",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "kycConsent",
+      "relationshipName": "consent",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

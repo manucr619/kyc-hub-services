@@ -1,0 +1,74 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (kycConsent(); as kycConsentRef) {
+      <div>
+        <h2 data-cy="kycConsentDetailsHeading"><span jhiTranslate="kycNetworkApp.kycConsent.detail.title">Kyc Consent</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ kycConsentRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.kycConsent.consentToken">Consent Token</span></dt>
+          <dd>
+            <span>{{ kycConsentRef.consentToken }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.kycConsent.consentGivenAt">Consent Given At</span></dt>
+          <dd>
+            <span>{{ kycConsentRef.consentGivenAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.kycConsent.expiresAt">Expires At</span></dt>
+          <dd>
+            <span>{{ kycConsentRef.expiresAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.kycConsent.isRevoked">Is Revoked</span></dt>
+          <dd>
+            <span>{{ kycConsentRef.isRevoked }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.kycConsent.revokedAt">Revoked At</span></dt>
+          <dd>
+            <span>{{ kycConsentRef.revokedAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.kycConsent.customer">Customer</span></dt>
+          <dd>
+            @if (kycConsent()!.customer) {
+              <div>
+                <a [routerLink]="['/customer', kycConsent()!.customer?.id, 'view']">{{ kycConsentRef.customer?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.kycConsent.issuerBank">Issuer Bank</span></dt>
+          <dd>
+            @if (kycConsent()!.issuerBank) {
+              <div>
+                <a [routerLink]="['/bank', kycConsent()!.issuerBank?.id, 'view']">{{ kycConsentRef.issuerBank?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="kycNetworkApp.kycConsent.recipientBank">Recipient Bank</span></dt>
+          <dd>
+            @if (kycConsent()!.recipientBank) {
+              <div>
+                <a [routerLink]="['/bank', kycConsent()!.recipientBank?.id, 'view']">{{ kycConsentRef.recipientBank?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/kyc-consent', kycConsentRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

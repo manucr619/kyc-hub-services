@@ -1,0 +1,28 @@
+{
+  "kycNetworkApp": {
+    "countryRegulation": {
+      "home": {
+        "title": "Country Regulations",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Country Regulation",
+        "createOrEditLabel": "Create or edit a Country Regulation",
+        "notFound": "No Country Regulations found"
+      },
+      "created": "A new Country Regulation is created with identifier {{ param }}",
+      "updated": "A Country Regulation is updated with identifier {{ param }}",
+      "deleted": "A Country Regulation is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Country Regulation {{ id }}?"
+      },
+      "detail": {
+        "title": "Country Regulation"
+      },
+      "id": "ID",
+      "countryCode": "Country Code",
+      "countryName": "Country Name",
+      "kycRequirements": "Kyc Requirements",
+      "dataLocalization": "Data Localization",
+      "regulatorContact": "Regulator Contact"
+    }
+  }
+}

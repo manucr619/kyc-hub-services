@@ -1,0 +1,209 @@
+<div>
+  <h2 id="page-heading" data-cy="KycDataRequestHeading">
+    <span jhiTranslate="kycNetworkApp.kycDataRequest.home.title">Kyc Data Requests</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="kycNetworkApp.kycDataRequest.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-kyc-data-request"
+        [routerLink]="['/kyc-data-request/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="kycNetworkApp.kycDataRequest.home.createLabel">Create a new Kyc Data Request</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (kycDataRequests().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="kycNetworkApp.kycDataRequest.home.notFound">No Kyc Data Requests found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="requestRef">
+              <div class="d-flex">
+                <span jhiTranslate="kycNetworkApp.kycDataRequest.requestRef">Request Ref</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="requestDate">
+              <div class="d-flex">
+                <span jhiTranslate="kycNetworkApp.kycDataRequest.requestDate">Request Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="kycNetworkApp.kycDataRequest.status">Status</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="requestPurpose">
+              <div class="d-flex">
+                <span jhiTranslate="kycNetworkApp.kycDataRequest.requestPurpose">Request Purpose</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="encryptedResponseData">
+              <div class="d-flex">
+                <span jhiTranslate="kycNetworkApp.kycDataRequest.encryptedResponseData">Encrypted Response Data</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="respondedAt">
+              <div class="d-flex">
+                <span jhiTranslate="kycNetworkApp.kycDataRequest.respondedAt">Responded At</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="customer.id">
+              <div class="d-flex">
+                <span jhiTranslate="kycNetworkApp.kycDataRequest.customer">Customer</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="fromBank.id">
+              <div class="d-flex">
+                <span jhiTranslate="kycNetworkApp.kycDataRequest.fromBank">From Bank</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="toBank.id">
+              <div class="d-flex">
+                <span jhiTranslate="kycNetworkApp.kycDataRequest.toBank">To Bank</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="consent.id">
+              <div class="d-flex">
+                <span jhiTranslate="kycNetworkApp.kycDataRequest.consent">Consent</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (kycDataRequest of kycDataRequests(); track trackId(kycDataRequest)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/kyc-data-request', kycDataRequest.id, 'view']">{{ kycDataRequest.id }}</a>
+              </td>
+              <td>{{ kycDataRequest.requestRef }}</td>
+              <td>{{ kycDataRequest.requestDate | formatMediumDatetime }}</td>
+              <td [jhiTranslate]="'kycNetworkApp.RequestStatus.' + (kycDataRequest.status ?? 'null')">
+                {{
+                  { null: '', REQUESTED: 'REQUESTED', APPROVED: 'APPROVED', DENIED: 'DENIED', EXPIRED: 'EXPIRED' }[
+                    kycDataRequest.status ?? 'null'
+                  ]
+                }}
+              </td>
+              <td>{{ kycDataRequest.requestPurpose }}</td>
+              <td>{{ kycDataRequest.encryptedResponseData }}</td>
+              <td>{{ kycDataRequest.respondedAt | formatMediumDatetime }}</td>
+              <td>
+                @if (kycDataRequest.customer) {
+                  <div>
+                    <a [routerLink]="['/customer', kycDataRequest.customer.id, 'view']">{{ kycDataRequest.customer.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (kycDataRequest.fromBank) {
+                  <div>
+                    <a [routerLink]="['/bank', kycDataRequest.fromBank.id, 'view']">{{ kycDataRequest.fromBank.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (kycDataRequest.toBank) {
+                  <div>
+                    <a [routerLink]="['/bank', kycDataRequest.toBank.id, 'view']">{{ kycDataRequest.toBank.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (kycDataRequest.consent) {
+                  <div>
+                    <a [routerLink]="['/kyc-consent', kycDataRequest.consent.id, 'view']">{{ kycDataRequest.consent.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/kyc-data-request', kycDataRequest.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/kyc-data-request', kycDataRequest.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(kycDataRequest)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (kycDataRequests().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

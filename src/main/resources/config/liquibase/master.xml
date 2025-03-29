@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+    <property name="floatType" value="float4" dbms="postgresql"/>
+    <property name="clobType" value="clob" dbms="postgresql"/>
+    <property name="blobType" value="blob" dbms="postgresql"/>
+    <property name="uuidType" value="uuid" dbms="postgresql"/>
+    <property name="datetimeType" value="datetime" dbms="postgresql"/>
+    <property name="timeType" value="time(6)" dbms="postgresql"/>
+
+    <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20250329222217_added_entity_Bank.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20250329222317_added_entity_Customer.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20250329222417_added_entity_KycCredential.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20250329222517_added_entity_Transaction.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20250329222617_added_entity_CountryRegulation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20250329222717_added_entity_KycConsent.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20250329222817_added_entity_KycDataRequest.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20250329222917_added_entity_APIAuditLog.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20250329222317_added_entity_constraints_Customer.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20250329222417_added_entity_constraints_KycCredential.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20250329222517_added_entity_constraints_Transaction.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20250329222717_added_entity_constraints_KycConsent.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20250329222817_added_entity_constraints_KycDataRequest.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20250329222917_added_entity_constraints_APIAuditLog.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
+    <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
+</databaseChangeLog>

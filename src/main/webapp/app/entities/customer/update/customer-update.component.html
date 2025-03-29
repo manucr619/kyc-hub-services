@@ -1,0 +1,149 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-customer-heading" data-cy="CustomerCreateUpdateHeading" jhiTranslate="kycNetworkApp.customer.home.createOrEditLabel">
+        Create or edit a Customer
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="kycNetworkApp.customer.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let fullNameRef = editForm.get('fullName')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_fullName" jhiTranslate="kycNetworkApp.customer.fullName">Full Name</label>
+          <input type="text" class="form-control" name="fullName" id="field_fullName" data-cy="fullName" formControlName="fullName" />
+          @if (fullNameRef.invalid && (fullNameRef.dirty || fullNameRef.touched)) {
+            <div>
+              @if (editForm.get('fullName')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateOfBirth" jhiTranslate="kycNetworkApp.customer.dateOfBirth">Date Of Birth</label>
+          <div class="input-group">
+            <input
+              id="field_dateOfBirth"
+              data-cy="dateOfBirth"
+              type="text"
+              class="form-control"
+              name="dateOfBirth"
+              ngbDatepicker
+              #dateOfBirthDp="ngbDatepicker"
+              formControlName="dateOfBirth"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateOfBirthDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        @let customerTypeRef = editForm.get('customerType')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_customerType" jhiTranslate="kycNetworkApp.customer.customerType">Customer Type</label>
+          <select class="form-control" name="customerType" formControlName="customerType" id="field_customerType" data-cy="customerType">
+            <option [ngValue]="null">{{ 'kycNetworkApp.CustomerType.null' | translate }}</option>
+            @for (customerType of customerTypeValues; track $index) {
+              <option [value]="customerType">{{ 'kycNetworkApp.CustomerType.' + customerType | translate }}</option>
+            }
+          </select>
+          @if (customerTypeRef.invalid && (customerTypeRef.dirty || customerTypeRef.touched)) {
+            <div>
+              @if (editForm.get('customerType')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_nationalId" jhiTranslate="kycNetworkApp.customer.nationalId">National Id</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nationalId"
+            id="field_nationalId"
+            data-cy="nationalId"
+            formControlName="nationalId"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_passportNumber" jhiTranslate="kycNetworkApp.customer.passportNumber">Passport Number</label>
+          <input
+            type="text"
+            class="form-control"
+            name="passportNumber"
+            id="field_passportNumber"
+            data-cy="passportNumber"
+            formControlName="passportNumber"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_address" jhiTranslate="kycNetworkApp.customer.address">Address</label>
+          <input type="text" class="form-control" name="address" id="field_address" data-cy="address" formControlName="address" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_email" jhiTranslate="kycNetworkApp.customer.email">Email</label>
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_phone" jhiTranslate="kycNetworkApp.customer.phone">Phone</label>
+          <input type="text" class="form-control" name="phone" id="field_phone" data-cy="phone" formControlName="phone" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_country" jhiTranslate="kycNetworkApp.customer.country">Country</label>
+          <input type="text" class="form-control" name="country" id="field_country" data-cy="country" formControlName="country" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_countryRegulation" jhiTranslate="kycNetworkApp.customer.countryRegulation"
+            >Country Regulation</label
+          >
+          <select
+            class="form-control"
+            id="field_countryRegulation"
+            data-cy="countryRegulation"
+            name="countryRegulation"
+            formControlName="countryRegulation"
+            [compareWith]="compareCountryRegulation"
+          >
+            <option [ngValue]="null"></option>
+            @for (countryRegulationOption of countryRegulationsSharedCollection; track $index) {
+              <option [ngValue]="countryRegulationOption">{{ countryRegulationOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
