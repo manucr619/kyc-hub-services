@@ -1,0 +1,11 @@
+id;name;bic_code;country;is_active
+1;HSBC Bank;HSBCGB2L;United Kingdom;true
+2;Deutsche Bank;DEUTDEFF;Germany;true
+3;BNP Paribas;BNPAFRPP;France;true
+4;JP Morgan Chase;CHASUS33;United States;true
+5;Credit Suisse;CRESCHZZ;Switzerland;true
+6;Standard Chartered;SCBLGB2L;United Kingdom;true
+7;UBS Bank;UBSWCHZH;Switzerland;true
+8;Barclays Bank;BARCGB22;United Kingdom;true
+9;Goldman Sachs;GOLDUS33;United States;true
+10;Morgan Stanley;MSNYUS33;United States;true

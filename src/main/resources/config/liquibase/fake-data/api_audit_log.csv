@@ -1,0 +1,11 @@
+id;event_time;action;status_code;message;source_ip;initiated_by;endpoint_accessed
+1;2025-03-29T12:55:49;POST;200;Customer verification successful;192.168.1.100;system;/api/v1/kyc/verify
+2;2025-03-29T09:35:35;GET;404;Resource not found;10.0.0.45;admin;/api/v1/customers/12345
+3;2025-03-29T20:04:06;PUT;200;Customer details updated;172.16.0.88;user;/api/v1/customers/789
+4;2025-03-29T10:11:56;POST;400;Invalid request payload;192.168.1.101;system;/api/v1/transactions
+5;2025-03-29T19:37:12;DELETE;204;Resource deleted successfully;10.0.0.46;admin;/api/v1/kyc/consent/456
+6;2025-03-29T17:06:14;GET;200;Transaction history retrieved;172.16.0.89;user;/api/v1/transactions/history
+7;2025-03-29T10:39:07;POST;201;New customer created;192.168.1.102;system;/api/v1/customers
+8;2025-03-29T20:53:41;PUT;403;Unauthorized access;10.0.0.47;user;/api/v1/admin/settings
+9;2025-03-28T23:44:00;GET;200;Bank details retrieved;172.16.0.90;system;/api/v1/banks/789
+10;2025-03-29T17:06:36;POST;500;Internal server error;192.168.1.103;admin;/api/v1/kyc/process

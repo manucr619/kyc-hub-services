@@ -1,0 +1,11 @@
+id;request_ref;request_date;status;request_purpose;encrypted_response_data;responded_at
+1;KYC-2025-001;2025-03-29T04:15:12;EXPIRED;Identity verification;encrypted_data_abc123;2025-03-29T14:33:20
+2;KYC-2025-002;2025-03-29T17:56:16;REQUESTED;Address verification;encrypted_data_def456;
+3;KYC-2025-003;2025-03-29T05:27:03;EXPIRED;Document verification;encrypted_data_ghi789;2025-03-29T18:09:24
+4;KYC-2025-004;2025-03-29T00:03:03;EXPIRED;Risk assessment;encrypted_data_jkl012;2025-03-29T02:10:57
+5;KYC-2025-005;2025-03-29T10:07:22;APPROVED;Enhanced due diligence;encrypted_data_mno345;2025-03-28T23:31:09
+6;KYC-2025-006;2025-03-29T03:46:26;EXPIRED;PEP screening;encrypted_data_pqr678;2025-03-29T10:12:03
+7;KYC-2025-007;2025-03-28T23:32:01;APPROVED;Sanctions check;encrypted_data_stu901;2025-03-29T19:25:31
+8;KYC-2025-008;2025-03-28T23:53:15;DENIED;Adverse media check;encrypted_data_vwx234;2025-03-29T05:20:32
+9;KYC-2025-009;2025-03-29T20:35:14;DENIED;Beneficial ownership;encrypted_data_yz567;2025-03-29T01:08:37
+10;KYC-2025-010;2025-03-29T15:55:40;REQUESTED;Source of funds;encrypted_data_abc890;

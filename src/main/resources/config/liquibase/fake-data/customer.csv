@@ -1,0 +1,11 @@
+id;full_name;date_of_birth;customer_type;national_id;passport_number;address;email;phone;country
+1;John Smith;1985-06-15;INDIVIDUAL;GB123456A;P12345678;123 High Street, London, UK;john.smith@email.com;+44 20 7123 4567;United Kingdom
+2;Sarah Johnson;1990-03-22;INDIVIDUAL;US987654321;P87654321;456 Park Avenue, New York, USA;sarah.j@email.com;+1 212 555 0123;United States
+3;Michael Brown;1978-11-30;BUSINESS;DE123456;P23456789;789 Hauptstraße, Berlin, Germany;m.brown@company.com;+49 30 1234 5678;Germany
+4;Emma Wilson;1988-09-05;INDIVIDUAL;FR987654;P34567890;321 Rue de Paris, Paris, France;emma.w@email.com;+33 1 23 45 67 89;France
+5;David Lee;1992-04-18;BUSINESS;CH123456;P45678901;654 Bahnhofstrasse, Zurich, Switzerland;d.lee@company.com;+41 44 123 4567;Switzerland
+6;Lisa Chen;1983-12-25;INDIVIDUAL;SG123456;P56789012;987 Orchard Road, Singapore;lisa.c@email.com;+65 6789 0123;Singapore
+7;Robert Taylor;1975-08-10;BUSINESS;JP123456;P67890123;123 Ginza, Tokyo, Japan;r.taylor@company.com;+81 3 1234 5678;Japan
+8;Maria Garcia;1995-01-28;INDIVIDUAL;ES123456;P78901234;456 Calle Mayor, Madrid, Spain;maria.g@email.com;+34 91 123 4567;Spain
+9;James Wilson;1980-07-15;BUSINESS;AU123456;P89012345;789 Collins Street, Melbourne, Australia;j.wilson@company.com;+61 3 1234 5678;Australia
+10;Sophie Martin;1987-02-20;INDIVIDUAL;CA123456;P90123456;321 Queen Street, Toronto, Canada;sophie.m@email.com;+1 416 123 4567;Canada

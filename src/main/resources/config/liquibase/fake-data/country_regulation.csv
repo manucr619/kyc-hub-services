@@ -1,0 +1,11 @@
+id;country_code;country_name;kyc_requirements;data_localization;regulator_contact
+1;GB;United Kingdom;Enhanced due diligence for PEPs;true;kyc@fca.org.uk
+2;US;United States;Customer identification program;true;kyc@finra.org
+3;DE;Germany;Basic due diligence required;true;kyc@bafin.de
+4;FR;France;Enhanced monitoring for high-risk;true;kyc@acpr.banque-france.fr
+5;CH;Switzerland;High-risk customer screening;true;kyc@finma.ch
+6;SG;Singapore;Risk-based approach;true;kyc@mas.gov.sg
+7;JP;Japan;Strict identity verification;true;kyc@fsa.go.jp
+8;AU;Australia;Customer due diligence;true;kyc@asic.gov.au
+9;CA;Canada;Proceeds of crime regulations;true;kyc@fintrac-canafe.gc.ca
+10;HK;Hong Kong;Anti-money laundering;true;kyc@sfc.hk
